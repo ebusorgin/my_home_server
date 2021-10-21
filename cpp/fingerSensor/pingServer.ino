@@ -59,8 +59,8 @@ client.println(queryString.length());
 client.println();
 client.print(queryString);
 client.println();
-client.stop();
-return;
+
+
  char endOfHeaders[] = "\r\n\r\n";
   if (!client.find(endOfHeaders)) {
     Serial.println(F("Invalid response"));
@@ -88,7 +88,7 @@ btn2 = doc["btn2"].as<long>();digitalWrite(24,btn2);
 btn3 = doc["btn3"].as<long>();digitalWrite(26,btn3);
 btn4 = doc["btn4"].as<long>();digitalWrite(28,btn4);
 
-  
+   Serial.println(btn1);
 
   } else {// if not connected:
     Serial.println("connection failed");

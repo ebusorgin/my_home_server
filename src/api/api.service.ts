@@ -33,6 +33,9 @@ export class ApiService {
   getConfig(){
     return this.CONFIG
   }
+  setConfig(cfg:StatusDeviceDto){
+    this.CONFIG = cfg
+  }
   sedMessageAllUsers(){
     this.appService.USERS.map((user)=>{
       user.ws.emit('config',this.CONFIG)

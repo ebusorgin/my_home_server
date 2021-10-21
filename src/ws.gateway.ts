@@ -5,6 +5,7 @@ import { AppService } from "./app.service";
 import { ApiService } from "./api/api.service";
 import { UserInfo } from "os";
 import { UserWsDto } from "./dto/user-ws.dto";
+import { StatusDeviceDto } from "./dto/status-device.dto";
 @WebSocketGateway()
 export class WsGateway {
   constructor(public appService:AppService,private apiService:ApiService) {
@@ -16,8 +17,8 @@ export class WsGateway {
   private logger: Logger = new Logger('AppGateway');
 
   @SubscribeMessage('light')
-  handleMessage(client: Socket, payload: string): void {
-
+  handleMessage(client: Socket, payload: StatusDeviceDto): void {
+    this.apiService.setConfig(payload)
 
 
     this.server.emit('msgToClient', payload);
