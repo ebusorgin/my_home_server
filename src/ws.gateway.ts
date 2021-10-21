@@ -19,7 +19,7 @@ export class WsGateway {
   handleMessage(client: Socket, payload: string): void {
 
 
-    console.log('!!!!!!!!!!!!!!!!!')
+
     this.server.emit('msgToClient', payload);
   }
 
