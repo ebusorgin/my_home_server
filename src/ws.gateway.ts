@@ -3,8 +3,6 @@ import { Socket, Server } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { AppService } from "./app.service";
 import { ApiService } from "./api/api.service";
-import { UserInfo } from "os";
-import { UserWsDto } from "./dto/user-ws.dto";
 import { StatusDeviceDto } from "./dto/status-device.dto";
 @WebSocketGateway()
 export class WsGateway {
@@ -14,14 +12,11 @@ export class WsGateway {
   @WebSocketServer()
   server: Server;
 
-  private logger: Logger = new Logger('AppGateway');
+  private logger: Logger = new Logger('WsGateway');
 
   @SubscribeMessage('light')
   handleMessage(client: Socket, payload: StatusDeviceDto): void {
     this.apiService.setConfig(payload)
-
-
-    this.server.emit('msgToClient', payload);
   }
 
   afterInit(server: Server) {
@@ -29,15 +24,14 @@ export class WsGateway {
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.log(`Client disconnected: ${client.id}`);
+    this.logger.log(`User disconnected: ${client.id}`);
+    this.appService.deleteUser(client)
+
   }
 
   handleConnection(client: Socket, ...args: any[]) {
     client.emit('config',this.apiService.getConfig())
-    this.appService.USERS.push({
-      uid:client.id,
-      ws:client
-    } as UserWsDto)
+    this.appService.createUser(client)
 
   }
 
