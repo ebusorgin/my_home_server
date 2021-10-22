@@ -6,7 +6,7 @@ String PATH_NAME   = "/set_status";
 
 void sendBtn(int btnnum,int value){
   if(client.connect(HOST_NAME, HTTP_PORT)) {
-   String queryString = "?";
+   String queryString = "";
 
    queryString = queryString + "btn=" + btnnum + "&";
    queryString = queryString + "value=" + value + "&";

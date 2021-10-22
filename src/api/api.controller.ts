@@ -19,7 +19,8 @@ export class ApiController {
   }
   @Post('btnstatus')
   @HttpCode(HttpStatus.OK)
-  btnstatus(@Body() statusDeviceDto:StatusDeviceDto):string{
+  btnstatus(@Body() statusDeviceDto:any):string{
+
     return this.apiService.btnstatus(statusDeviceDto)
   }
 

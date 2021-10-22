@@ -58,7 +58,9 @@ export class ApiService {
     return conf
   }
   btnstatus (data) {
-    this.CONFIG['btn'+data.btn] = data.value
+    console.log(data)
+    this.CONFIG['btn'+data.btn] = +data.value
+    console.log(this.CONFIG)
     this.sedMessageAllUsers();
 
     return JSON.stringify(this.CONFIG);
