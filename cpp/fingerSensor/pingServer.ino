@@ -88,7 +88,9 @@ btn2 = doc["btn2"].as<long>();digitalWrite(24,btn2);
 btn3 = doc["btn3"].as<long>();digitalWrite(26,btn3);
 btn4 = doc["btn4"].as<long>();digitalWrite(28,btn4);
 
-   Serial.println(btn1);
+btn7 = doc["btn7"].as<long>();digitalWrite(34,btn7);
+
+ 
 
   } else {// if not connected:
     Serial.println("connection failed");

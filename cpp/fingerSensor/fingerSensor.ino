@@ -19,7 +19,7 @@ EthernetClient client;
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 const byte DATA_MAX_SIZE = 32;
 char data[DATA_MAX_SIZE]; 
-int btn1 = 1;
+int btn1 = 1;//
 int btn2 = 1;
 int btn3 = 1;
 int btn4 = 1;

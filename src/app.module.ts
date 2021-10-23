@@ -7,10 +7,14 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
 import { ApiController } from "./api/api.controller";
 import { ApiService } from "./api/api.service";
-// import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLModule } from '@nestjs/graphql';
 @Module({
   imports: [
-    // GraphQLModule.forRoot({}),
+    // GraphQLModule.forRoot({
+    //   debug:true,
+    //   playground:true,
+    //   autoSchemaFile: join(process.cwd(),'src/schema.gql'),
+    // }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "public")
     })],
