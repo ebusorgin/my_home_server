@@ -14,10 +14,12 @@ export class WsGateway {
 
   private logger: Logger = new Logger('WsGateway');
 
-  @SubscribeMessage('light')
+  @SubscribeMessage('config')
   handleMessage(client: Socket, payload: StatusDeviceDto): void {
     this.apiService.setConfig(payload)
   }
+
+
 
   afterInit(server: Server) {
     this.logger.log('Init');

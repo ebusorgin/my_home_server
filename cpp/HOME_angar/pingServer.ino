@@ -1,32 +1,33 @@
 int    HTTP_PORT   = 80;
-String HTTP_METHOD = "GET";
+String HTTP_METHOD = "POST";
 char   HOST_NAME[] = "94.250.255.234";
-String PATH_NAME   = "/get_hangar_status";
+String PATH_NAME   = "/api/get_hangar_status";
 
 
 
 void pingData(){
 int is_open_door = digitalRead(PIN_is_open_door);
- Serial.println(is_open_door);
+
       if(client.connect(HOST_NAME, HTTP_PORT)) {
-  Serial.println("start ping");
+  Serial.println("connection");
  
-  String queryString = "?";
+  String queryString = "";
   queryString = queryString + "is_open_door=" + is_open_door + "&";
-  queryString = queryString + "gate_door=" + gate_door + "&";
+  queryString = queryString + "gate_door=" + gate_door + "";
    
-    client.println(HTTP_METHOD + " " + PATH_NAME + queryString +" HTTP/1.1");
-    client.println("Host: " + String(HOST_NAME));
-    client.println("Connection: close");
-    client.println(); // end HTTP header
-   
-//while(client.connected()) {
-//      if(client.available()){
-//        // read an incoming byte from the server and print it to serial monitor:
-//        char c = client.read();
-//        Serial.print(c);
-//      }
-//    }
+
+
+
+  client.println("POST /api/get_hangar_status HTTP/1.1");
+  client.println("Host: "+String(HOST_NAME));
+  client.println("Content-Type: application/x-www-form-urlencoded");
+  client.println("Connection: close");
+  client.print("Content-Length: ");
+  client.println(queryString.length());
+  client.println();
+  client.print(queryString);
+  client.println();
+
 
  char endOfHeaders[] = "\r\n\r\n";
   if (!client.find(endOfHeaders)) {
@@ -50,11 +51,12 @@ int is_open_door = digitalRead(PIN_is_open_door);
     return;
   }
   client.stop();
+   Serial.println(doc["gate_door"].as<long>());
 int gate_door_temp = doc["gate_door"].as<long>();
 
 if (gate_door_temp==1){
   gate_door=0;
-
+  Serial.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
   digitalWrite(PIN_gate_door, HIGH);
   delay(200);
   digitalWrite(PIN_gate_door, LOW);

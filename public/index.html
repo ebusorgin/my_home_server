@@ -32,9 +32,9 @@
     </button>
 
     <iframe
-      width="800"
-      height="600"
-      src="https://www.youtube.com/embed/vIxaezsF7xk?controls=0&autoplay=1&mute=1"
+      width="1280px"
+      height="720px"
+      src="https://www.youtube.com/embed/vIxaezsF7xk?controls=1&autoplay=1&mute=1"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -47,13 +47,13 @@
     let CONFIG = {}
     let socket = io();
     setDoor = (btn) => {
-        CONFIG[btn] == 1 ? CONFIG[btn] = 0 : CONFIG[btn] = 1;
-        socket.emit('door', CONFIG)
+        CONFIG[btn] = 1;
+        socket.emit('config', CONFIG)
     }
     setLight = (btn) => {
         $('.' + btn).css({backgroundColor: CONFIG[btn] == 1 ? '#b47c00' : '#595959'});
         CONFIG[btn] == 1 ? CONFIG[btn] = 0 : CONFIG[btn] = 1;
-        socket.emit('light', CONFIG)
+        socket.emit('config', CONFIG)
     }
 
     socket.on('config', function (msg) {

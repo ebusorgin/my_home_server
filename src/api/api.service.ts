@@ -34,7 +34,9 @@ export class ApiService {
     return this.CONFIG
   }
   setConfig(cfg:StatusDeviceDto){
+
     this.CONFIG = cfg
+    console.log(this.CONFIG)
   }
   sedMessageAllUsers(){
     this.appService.USERS.map((user)=>{
