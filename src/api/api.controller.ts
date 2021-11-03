@@ -10,7 +10,7 @@ export class ApiController {
   @Post('set_status')
   @HttpCode(HttpStatus.OK)
   set_status(@Body() statusDeviceDto:StatusDeviceDto):string{
-      return this.apiService.set_status(statusDeviceDto)
+      return this.apiService.set_status()
   }
   @Post('get_hangar_status')
   @HttpCode(HttpStatus.OK)

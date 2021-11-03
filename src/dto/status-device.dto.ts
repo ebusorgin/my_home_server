@@ -21,6 +21,8 @@ export class StatusDeviceDto {
   gate_door: number
   is_open_door: number
   needUsers: number
+  event_alarm_hangar: number
+  event_alarm_home: number
 }
 
 @ObjectType()

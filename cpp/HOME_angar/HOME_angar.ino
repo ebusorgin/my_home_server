@@ -16,7 +16,7 @@ int PIN_hangar_gates = 3;//реле свет на воротах,
 int PIN_gate_door = 4;//реле  дверь воротах,
 int PIN_is_open_door = 5;//статус открытых дверей,
 int light_hangar_gates = 1;
-int gate_door = 0;
+int gate_door = 0; 
 TimerMs tmr(5000, 1, 1);
 
 void setup() {
@@ -27,13 +27,13 @@ void setup() {
    Serial.begin(9600);
   while (!Serial);
   delay(100);
-  Serial.println("status:board1:1");
+ 
  
     if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to obtaining an IP address using DHCP");
     while(true);
   }
-
+ Serial.println("status:board1:1");
    tmr.setPeriodMode();
  
 }

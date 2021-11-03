@@ -53,7 +53,7 @@ Serial.println("connected");
 client.println("POST /api/set_status HTTP/1.1");
 client.println("Host: "+String(HOST_NAME));
 client.println("Content-Type: application/x-www-form-urlencoded");
-client.println("Connection: close");
+client.println("Connection: close"); 
 client.print("Content-Length: ");
 client.println(queryString.length());
 client.println();

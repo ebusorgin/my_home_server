@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { StatusDeviceDto } from "../dto/status-device.dto";
-import { WsGateway } from "../ws.gateway";
+
 import { AppService } from "../app.service";
+import { getSunrise, getSunset } from 'sunrise-sunset-js';
 
 @Injectable()
 export class ApiService {
   constructor(private appService:AppService) {
+    setInterval(()=>{this.updateDate()},2000)
   }
   private CONFIG = {
     btn1:1,
@@ -27,23 +29,43 @@ export class ApiService {
     light_hangar_gates:1,
     gate_door:0,
     is_open_door:1,
-    needUsers:1
+    needUsers:1,
+    event_alarm_hangar:0
   } as StatusDeviceDto
+  public sunset
+  public sunrise
 
+  updateDate(){
+    this.sunset = getSunset(53.229219, 56.833872);//закат
+    this.sunrise = getSunrise(53.229219, 56.833872);//восход
+    let OffLight = new Date()>this.sunrise&&new Date()<this.sunset
+    if (OffLight){
+      this.CONFIG.btn7 = 1
+      this.CONFIG.light_hangar_gates = 1
+    }else{
+      this.CONFIG.btn7 = 0
+      this.CONFIG.light_hangar_gates = 0
+    }
+  }
   getConfig(){
     return this.CONFIG
   }
+  alarmHangar(){
+    this.CONFIG.event_alarm_hangar = 0
+  }
+  alarmHome(){
+    this.CONFIG.event_alarm_home = 0
+  }
   setConfig(cfg:StatusDeviceDto){
-
     this.CONFIG = cfg
-    console.log(this.CONFIG)
   }
   sedMessageAllUsers(){
     this.appService.USERS.map((user)=>{
       user.ws.emit('config',this.CONFIG)
     })
   }
-  set_status(data:StatusDeviceDto){
+  set_status(){
+    console.log('BASE')
     this.sedMessageAllUsers();
     return JSON.stringify(this.CONFIG)
   }

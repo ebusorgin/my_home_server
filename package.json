@@ -31,11 +31,13 @@
     "apollo-server-express": "^3.4.0",
     "express-graphql": "^0.12.0",
     "graphql": "^15.6.1",
+    "moment": "^2.29.1",
     "node-rtsp-stream": "0.0.9",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "sunrise-sunset-js": "^2.2.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
